@@ -3,6 +3,7 @@ data/
 dataset/
 chest_xray/
 *.zip
+node_modules/
 
 # 🔴 Ignore trained models
 *.h5
