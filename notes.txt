@@ -106,6 +106,69 @@ cnn-pneoumnia-appln
       push code to GitHub
             https://github.com/fullstacktraning/deep-learning-appln.git
 
+2) create EC2 instance
+      instance-name : pneoumnia-appln
+      size : t3-large
+      hard-disk : 50GB
+
+3) open the below ports (inbound rules)
+        80 (Docker) HTTP
+        8080  Jenkins
+        8000  uvicorn
+
+4) update ubuntu
+      > sudo apt update -y
+
+5) install JDK (Jenkins installation depending on JDK)
+          https://www.jenkins.io/doc/book/installing/linux/
+
+          sudo apt update
+          sudo apt install fontconfig openjdk-21-jre
+          java -version
+
+6) install Jenkins
+
+      sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key
+echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt update
+sudo apt install jenkins
+
+7) install docker
+      > sudo apt update -y
+      > sudo apt install docker.io -y
+
+8) enable global permissions
+      > sudo usermod -aG docker ubuntu
+      > sudo usermod -aG jenkins ubuntu
+      > sudo usermod -aG docker jenkins
+
+9) restart jenkins & docker
+      > sudo systemctl restart jenkins
+      > sudo systemctl restart docker
+
+10) know the jenkins password
+      sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+11) install suggested plugins in Jenkins (http://EC2_IP:8080/)
+
+12) install below plugins
+      -> Docker
+      -> Docker Pipeline
+      -> Git Server
+
+13) Create and Build Pipeline
+
+14) Test the Application
+
+
+
+
+
+
+
 
 
 
