@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pneumonia Detection</title>
+</head>
+<body style="text-align:center; font-family:Arial;">
+
+    <h1>🩺 Pneumonia Detection App</h1>
+
+    <form action="/predict" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <br><br>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+        <h2>{{ prediction }}</h2>
+        <img src="{{ img_path }}" width="300">
+    {% endif %}
+
+</body>
+</html>

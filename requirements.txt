@@ -1,0 +1,12 @@
+numpy
+pandas
+matplotlib
+tensorflow
+opencv-python
+kaggle==1.5.16
+scikit-learn
+flask
+pillow
+fastapi
+uvicorn
+python-multipart

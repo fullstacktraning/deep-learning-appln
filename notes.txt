@@ -1,0 +1,201 @@
+------------------------------------------------------------------------------
+windows
+*******
+    1) download "kaggle.json" file from kaggle website
+    2) C://Users//name//.kaggle/kaggle.json
+
+mac
+***
+    open the terminal
+    mkdir -p ~/.kaggle
+    mv ~/Downloads/kaggle.json ~/.kaggle/
+    chmod 600 ~/.kaggle/kaggle.json  
+    ls ~/.kaggle  
+        output : kaggle.json
+------------------------------------------------------------------------------
+
+venv311
+requirements.txt
+    tensorflow
+    kaggle==1.5.16
+    opencv-python
+    fastapi #create API'S GET,POST,PUT,DELETE
+    uvicorn #used to run Fast API'S
+    numpy
+    pandas
+
+pip install -r requirements.txt
+------------------------------------------------------------------------------
+    download.py
+    > python download.py
+------------------------------------------------------------------------------
+1) training data      
+   validation data  
+   testing data     
+
+2) how CNN understand images
+    Gray Scale Images 
+        - 3 colors
+        - white(255), black(0), gray(112)
+    RGB
+        (97,79,207)
+  
+3) Augumentation
+    Image ---> Stright, Rotate, Curved,Zoom, Blur
+
+
+4) EarlyStopping
+                            Epochs 1:   90%.      10%
+                            Epochs 2:   95%       5%
+                            Epochs 3:   95%.      5%
+                            Epochs 4:   95%.      5%
+
+
+
+                            Epochs 10:   95%       5%
+
+                            Epochs 250:  95%.      5%
+
+4) class_weight
+        1000 Normal x-rays       1normal - 1rs
+        100  pneumia x-rays      1 pneoumnia - 5rs
+                    
+
+5) MobileNetV2 (USA - Hospitals - API'S)  
+        build on top of billions of images 94.5%
+
+6) Reduce LR
+
+        Backpropagation
+
+        Epochs 1:    90%.     10%
+            weight : 10 - 11 = 1
+
+        Epochs 2:    95%      5%
+            weight : 12 - 12.1 -12.2 - 12.3
+
+        Epochs 3:    95%      5%
+            weight : 13
+
+*****************************************************************
+cnn-pneoumnia-appln
+          requirements.txt
+                tensorflow
+                opencv-python
+                fastapi
+                uvicorn
+                pillow # modify format, reduce the size
+                python-multipart # upload the data
+
+          main.py (library/model code)
+
+          pneumonia_model.keras
+
+          utils.py  (prediction-code)
+
+          app.py (Fast API)
+              @post
+
+          Dockerfile
+
+          Jenkinsfile
+            (PIPELINE)
+***************************************************************************
+
+1) step 1.
+      push code to GitHub
+            https://github.com/fullstacktraning/deep-learning-appln.git
+
+
+
+
+
+
+
+
+             
+
+
+
+               
+
+
+
+
+
+
+
+
+
+
+App.js
+******
+import React, { useState } from "react";
+
+function App() {
+  const [file, setFile] = useState(null);
+  const [result, setResult] = useState(null);
+
+  const handleUpload = async () => {
+    if (!file) {
+      alert("Please select a file");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch("http://13.49.240.62:8000/predict", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      setResult(data);
+    } catch (error) {
+      console.error(error);
+      alert("Error connecting to server");
+    }
+  };
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h1>Pneumonia Detection</h1>
+
+      <input
+        type="file"
+        onChange={(e) => setFile(e.target.files[0])}
+      />
+
+      <br /><br />
+
+      <button onClick={handleUpload}>Predict</button>
+
+      <br /><br />
+
+      {result && (
+        <div>
+          <h3>Result: {result.result.label}</h3>
+          <p>Confidence: {result.result.confidence}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default App;
+
+
+
+npm run build
+
+scp -i ~/Downloads/pneumonia-backend.pem -r dist ubuntu@13.49.240.62:~
+
+chmod 400 ~/Downloads/your-key.pem
+
+sudo npm install -g serve
+
+serve -s dist -l 3000
+
+http://13.49.240.62:3000

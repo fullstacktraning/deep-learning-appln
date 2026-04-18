@@ -1,0 +1,28 @@
+# 🔴 Ignore dataset files
+data/
+dataset/
+chest_xray/
+*.zip
+
+# 🔴 Ignore trained models
+*.h5
+
+
+# 🔴 Ignore virtual environment
+venv/
+venv311/
+
+# 🔴 Ignore Python cache
+__pycache__/
+*.pyc
+
+# 🔴 Ignore OS files
+.DS_Store
+Thumbs.db
+
+# 🔴 Ignore Kaggle credentials (VERY IMPORTANT)
+.kaggle/
+kaggle.json
+
+# 🔴 Ignore logs
+*.log
