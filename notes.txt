@@ -163,33 +163,13 @@ sudo apt install jenkins
 
 14) Test the Application
 
+-----------------------------------------------
+http://51.20.65.174:8000/predict  (POST)
 
+1) create react appln
+      > npm create vite@latest
 
-
-
-
-
-
-
-
-
-
-
-
-             
-
-
-
-               
-
-
-
-
-
-
-
-
-
+2) integrate "fastapi" to "react appln"
 
 App.js
 ******
@@ -209,7 +189,7 @@ function App() {
     formData.append("file", file);
 
     try {
-      const response = await fetch("http://13.49.240.62:8000/predict", {
+      const response = await fetch("http://51.20.65.174:8000/predict", {
         method: "POST",
         body: formData,
       });
@@ -249,16 +229,48 @@ function App() {
 
 export default App;
 
+3) run react appln
+      > npm run dev
+
+4) build the react application
+
+      > npm run build
+            Ex.
+                  dist
+
+5) push "dist" folder to EC2
+      scp -i ~/Downloads/pneumonia-backend.pem -r dist ubuntu@51.20.65.174:~
 
 
-npm run build
+6) run application in EC2
+        chmod 400 ~/Downloads/your-key.pem
 
-scp -i ~/Downloads/pneumonia-backend.pem -r dist ubuntu@13.49.240.62:~
+        sudo npm install -g serve
 
-chmod 400 ~/Downloads/your-key.pem
+        serve -s dist -l 3000
 
-sudo npm install -g serve
+        http://51.20.65.174:3000
 
-serve -s dist -l 3000
 
-http://13.49.240.62:3000
+
+
+
+             
+
+
+
+               
+
+
+
+
+
+
+
+
+
+
+
+
+
+
